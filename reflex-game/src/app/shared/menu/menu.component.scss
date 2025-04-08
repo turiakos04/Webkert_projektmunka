@@ -1,0 +1,20 @@
+a {
+    text-decoration: none;
+    color: rgba(26,44,53,255);
+    font-size: 20px;
+    border-radius: 0 !important;
+}
+
+.mdc-list-item:focus::before {
+    opacity: 0 !important;
+}
+
+.active-list-item {
+    background-color: rgba(90, 74, 247, 0.3);
+    color: rgba(26,44,53,255);
+    font-weight: bold;
+}
+
+mat-nav-list {
+    min-width: 200px;
+}
