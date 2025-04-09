@@ -1,39 +1,38 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { GameComponent } from './pages/game/game.component';
-import { LeaderboardComponent } from './pages/leaderboard/leaderboard.component';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { ResultsComponent } from './pages/results/results.component';
 
 export const routes: Routes = [
-    { path: 'home', component: HomeComponent },
-    
-    { path: 'game', component: GameComponent },
-
-    { path: 'leaderboard', component: LeaderboardComponent},
-
-    { path: 'profile', component: ProfileComponent },
-
-    { path: 'results', component: ResultsComponent},
-
-    // Paraméterezett útvonalak
-    // { path: 'task-edit/:id', component: TaskEditComponent },
-
-    // Üres elérési út - alapértelmezett útvonal
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
-
-    // Wildcard útvonal - ha egyik útvonal sem egyezik
-    { path: '**', component: HomeComponent }
-   
-    // Útvonalak egymásba ágyazása
-    /*
-    {
-        path: 'tasks',
-        title: 'Tasks',
-        component: TasksComponent,
-        children: [
-            { path: 'completed', component: CompletedComponent },
-        ]
-    },
-    */
+  {
+    path: 'home',
+    loadComponent: () =>
+      import('./pages/home/home.component').then(m => m.HomeComponent),
+  },
+  {
+    path: 'game',
+    loadComponent: () =>
+      import('./pages/game/game.component').then(m => m.GameComponent),
+  },
+  {
+    path: 'leaderboard',
+    loadComponent: () =>
+      import('./pages/leaderboard/leaderboard.component').then(m => m.LeaderboardComponent),
+  },
+  {
+    path: 'profile',
+    loadComponent: () =>
+      import('./pages/profile/profile.component').then(m => m.ProfileComponent),
+  },
+  {
+    path: 'results',
+    loadComponent: () =>
+      import('./pages/results/results.component').then(m => m.ResultsComponent),
+  },
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
+  {
+    path: '**',
+    redirectTo: 'home',
+  },
 ];

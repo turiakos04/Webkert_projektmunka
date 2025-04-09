@@ -1,1 +1,31 @@
-<p>leaderboard works!</p>
+<mat-toolbar color="primary">🏆 Ranglista</mat-toolbar>
+
+<!-- MatSort használata a táblázat szülő elemén -->
+<mat-table [dataSource]="dataSource" matSort>
+
+  <!-- Fejléc oszlopok definíciója MatSortHeader-rel -->
+  <ng-container matColumnDef="rank">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Helyezés </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.rank }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Név </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="reactionTime">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Reakcióidő (ms) </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.reactionTime }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="date">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Dátum </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.date }} </mat-cell>
+  </ng-container>
+
+  <!-- A táblázat sorai -->
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</mat-table>

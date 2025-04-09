@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule], // 👈 EZ A FONTOS RÉSZ
+  imports: [CommonModule],
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss']
 })
@@ -35,6 +36,14 @@ export class GameComponent {
     if (this.state === 'active') {
       this.reactionTime = now - this.startTime;
       this.state = 'result';
+    }
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.code === 'Space') {
+      event.preventDefault(); // ne görgessen az oldal
+      this.onBoxClick();
     }
   }
 }

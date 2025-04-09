@@ -23,7 +23,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'learnflow';
+  title = 'reflexgame';
 
   /*
   changePage(selectedPage: string) {
