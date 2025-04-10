@@ -33,6 +33,6 @@ Material-ok:
 
 Form: nincs még
 
-Pipe: ordinal
+Pipe: ordinal.pipe.ts
 
 
