@@ -5,12 +5,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
+import { OrdinalPipe } from '../../shared/pipes/ordinal.pipe';
+import { CommonModule } from '@angular/common';
 
 interface PlayerResult {
   name: string;
   reactionTime: number;
   date: string;
-  rank?: number;  // Hozzáadva a rank mező
+  rank?: number;
 }
 
 @Component({
@@ -22,7 +24,9 @@ interface PlayerResult {
     MatToolbarModule,
     MatTableModule,
     MatSortModule,
-    MatIconModule
+    MatIconModule,
+    OrdinalPipe,
+    CommonModule
   ]
 })
 export class LeaderboardComponent implements OnInit {
@@ -52,15 +56,12 @@ export class LeaderboardComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort | undefined;
 
   ngOnInit() {
-    // Rendezzük az adatokat reakcióidő alapján (növekvő sorrend)
     this.leaderboardData.sort((a, b) => a.reactionTime - b.reactionTime);
 
-    // Minden elemhez hozzárendeljük a helyezést
     this.leaderboardData.forEach((player, index) => {
-      player.rank = index + 1; // A legjobb reakcióidő kapja az 1-es helyezést
+      player.rank = index + 1;
     });
 
-    // Alkalmazzuk a rendezett adatokat a dataSource-ra
     this.dataSource = new MatTableDataSource(this.leaderboardData);
 
     if (this.sort) {

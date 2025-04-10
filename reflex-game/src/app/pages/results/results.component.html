@@ -1,1 +1,20 @@
-<p>results works!</p>
+<mat-card class="results-card">
+    <mat-card-content>
+      <mat-table [dataSource]="results">
+        <ng-container matColumnDef="date">
+          <mat-header-cell *matHeaderCellDef> Dátum </mat-header-cell>
+          <mat-cell *matCellDef="let result"> {{ result.date }} </mat-cell>
+        </ng-container>
+  
+        <ng-container matColumnDef="time">
+          <mat-header-cell *matHeaderCellDef> Reakcióidő (ms) </mat-header-cell>
+          <mat-cell *matCellDef="let result"> {{ result.time }} </mat-cell>
+        </ng-container>
+  
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      <p class="average">Átlagos reakcióidő: <strong>{{ averageTime }} ms</strong></p>
+    </mat-card-content>
+  </mat-card>
+  

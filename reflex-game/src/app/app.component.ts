@@ -25,11 +25,6 @@ import { RouterLink } from '@angular/router';
 export class AppComponent {
   title = 'reflexgame';
 
-  /*
-  changePage(selectedPage: string) {
-    this.page = selectedPage;
-  }*/
-
   onToggleSidenav(sidenav: MatSidenav){
     sidenav.toggle();
   }

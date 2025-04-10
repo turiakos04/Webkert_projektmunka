@@ -55,4 +55,27 @@
   button:hover {
     background-color: #0056b3;
   }
+
+  .result-actions {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
   
+  .spinner {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  .success-message {
+    color: green;
+    font-weight: bold;
+  }
+  
+.custom-spinner .mat-progress-spinner circle,
+.custom-spinner .mat-spinner circle {
+  stroke: rgba(26,44,53,255);
+}
+
+

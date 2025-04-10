@@ -7,3 +7,18 @@ mat-toolbar {
 mat-table {
     background-color: rgba(26,44,53,255);
 }
+
+.fast-reaction {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .slow-reaction {
+    color: red;
+    font-weight: bold;
+  }
+
+  mat-header-cell {
+    font-weight: bold;
+  }
+  

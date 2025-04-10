@@ -1,11 +1,13 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { ResultService } from '../../shared/services/result.service';
+import { Result } from '../../shared/models/result';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-game',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatProgressSpinnerModule],
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss']
 })
@@ -14,9 +16,16 @@ export class GameComponent {
   startTime!: number;
   reactionTime!: number;
   timeoutId: any;
+  resultSaved: boolean = false;
+  isSaving: boolean = false;
+  saveMessageShown: boolean = false;
+
+  constructor(private resultService: ResultService) {}
 
   startGame() {
     this.state = 'ready';
+    this.resultSaved = false;
+    this.saveMessageShown = false;
     const delay = Math.random() * 4000 + 1000;
 
     this.timeoutId = setTimeout(() => {
@@ -39,10 +48,30 @@ export class GameComponent {
     }
   }
 
+  saveResult() {
+    if (this.resultSaved) return;
+
+    this.isSaving = true;
+
+    setTimeout(() => {
+      const newResult: Result = {
+        owneremail: 'user@email.com',
+        time: this.reactionTime,
+        date: new Date().toISOString().slice(0, 10)
+      };
+
+      this.resultService.addResult(newResult);
+      this.resultSaved = true;
+      this.isSaving = false;
+      this.saveMessageShown = true;
+      console.log('Mentett eredmény:', newResult);
+    }, 1500);
+  }
+
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
     if (event.code === 'Space') {
-      event.preventDefault(); // ne görgessen az oldal
+      event.preventDefault();
       this.onBoxClick();
     }
   }

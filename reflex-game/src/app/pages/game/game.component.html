@@ -1,16 +1,28 @@
 <div class="game-container">
-    <h1>Reflex Teszt</h1>
-  
-    <div class="game-box" [ngClass]="state" (click)="onBoxClick()">
-      <ng-container [ngSwitch]="state">
-        <p *ngSwitchCase="'waiting'">Kattints a START-ra a kezdéshez</p>
-        <p *ngSwitchCase="'ready'">Várj a zöld jelzésre...</p>
-        <p *ngSwitchCase="'active'">KATTINTS MOST!</p>
-        <p *ngSwitchCase="'tooSoon'">Túl korán kattintottál!</p>
-        <p *ngSwitchCase="'result'">Reakcióidőd: {{ reactionTime }} ms</p>
-      </ng-container>
-    </div>
-  
-    <button (click)="startGame()">Start</button>
+  <h1>Reflex Teszt</h1>
+
+  <div class="game-box" [ngClass]="state" (click)="onBoxClick()">
+    <ng-container [ngSwitch]="state">
+      <p *ngSwitchCase="'waiting'">Kattints a START-ra a kezdéshez</p>
+      <p *ngSwitchCase="'ready'">Várj a zöld jelzésre...</p>
+      <p *ngSwitchCase="'active'">KATTINTS MOST!</p>
+      <p *ngSwitchCase="'tooSoon'">Túl korán kattintottál!</p>
+      <p *ngSwitchCase="'result'">Reakcióidőd: {{ reactionTime }} ms</p>
+    </ng-container>
   </div>
-  
+
+  <button (click)="startGame()">Start</button>
+
+  <div *ngIf="state === 'result'" class="result-actions">
+    <button (click)="saveResult()" [disabled]="isSaving || resultSaved">Eredmény mentése</button>
+
+    <mat-progress-spinner
+      *ngIf="isSaving"
+      mode="indeterminate"
+      diameter="30"
+      class="custom-spinner"
+    ></mat-progress-spinner>
+
+    <p *ngIf="saveMessageShown && !isSaving" class="success-message">Sikeres mentés!</p>
+  </div>
+</div>
