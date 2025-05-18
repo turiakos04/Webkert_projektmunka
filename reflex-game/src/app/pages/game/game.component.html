@@ -14,15 +14,24 @@
   <button (click)="startGame()">Start</button>
 
   <div *ngIf="state === 'result'" class="result-actions">
-    <button (click)="saveResult()" [disabled]="isSaving || resultSaved">Eredmény mentése</button>
+    <!-- Ha a felhasználó be van jelentkezve, akkor megjelenítjük a mentés gombot -->
+    <ng-container>
+      <button (click)="saveResult()" [disabled]="isSaving || resultSaved">Eredmény mentése</button>
 
-    <mat-progress-spinner
-      *ngIf="isSaving"
-      mode="indeterminate"
-      diameter="30"
-      class="custom-spinner"
-    ></mat-progress-spinner>
+      <mat-progress-spinner
+        *ngIf="isSaving"
+        mode="indeterminate"
+        diameter="30"
+        class="custom-spinner"
+      ></mat-progress-spinner>
 
-    <p *ngIf="saveMessageShown && !isSaving" class="success-message">Sikeres mentés!</p>
+      <p *ngIf="saveMessageShown && !isSaving" class="success-message">Sikeres mentés!</p>
+    </ng-container>
+    
+    <!-- Ha nincs bejelentkezve a felhasználó -->
+    <ng-template #notLoggedIn>
+      <p class="login-required-message">Eredmény mentéséhez be kell jelentkezned!</p>
+      <button routerLink="/login" class="login-button">Bejelentkezés</button>
+    </ng-template>
   </div>
 </div>

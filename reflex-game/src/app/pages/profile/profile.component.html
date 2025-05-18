@@ -1,1 +1,65 @@
-<p>In progress...</p>
+<div class="profile-container">
+  <mat-card class="profile-card">
+    <mat-card-header>
+      <mat-card-title>Profil</mat-card-title>
+      <mat-card-subtitle>Itt módosíthatod a profilodat</mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-form">
+        <div class="form-row">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Keresztnév</mat-label>
+            <input matInput formControlName="firstName" placeholder="Add meg a keresztnevedet">
+            <mat-error *ngIf="firstName?.errors?.['required']">A keresztnév megadása kötelező</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Vezetéknév</mat-label>
+            <input matInput formControlName="lastName" placeholder="Add meg a vezetéknevedet">
+            <mat-error *ngIf="lastName?.errors?.['required']">A vezetéknév megadása kötelező</mat-error>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="form-field full-width">
+          <mat-label>Email cím</mat-label>
+          <input matInput formControlName="email" placeholder="Add meg az email címedet" type="email">
+          <mat-error *ngIf="email?.errors?.['required']">Az email cím megadása kötelező</mat-error>
+          <mat-error *ngIf="email?.errors?.['email']">Érvénytelen email formátum</mat-error>
+        </mat-form-field>
+
+        <div class="password-section">
+          <h3>Jelszó módosítása</h3>
+          <p class="password-info">Hagyd üresen, ha nem szeretnéd módosítani a jelszavadat</p>
+          
+          <mat-form-field appearance="outline" class="form-field full-width">
+            <mat-label>Új jelszó</mat-label>
+            <input matInput formControlName="password" placeholder="Add meg az új jelszavadat" type="password">
+            <mat-error *ngIf="password?.errors?.['minlength']">
+              A jelszónak legalább 6 karakter hosszúnak kell lennie
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field full-width">
+            <mat-label>Jelszó megerősítése</mat-label>
+            <input matInput formControlName="confirmPassword" placeholder="Ismételd meg az új jelszavadat" type="password">
+            <mat-error *ngIf="profileForm.hasError('passwordMismatch')">
+              A jelszavak nem egyeznek
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-card-content>
+    
+    <mat-card-actions align="end">
+      <button mat-button type="button" [routerLink]="['/home']">Mégse</button>
+      <button 
+        mat-raised-button 
+        color="primary" 
+        (click)="onSubmit()" 
+        [disabled]="profileForm.invalid || isSubmitting">
+        {{ isSubmitting ? 'Mentés folyamatban...' : 'Mentés' }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

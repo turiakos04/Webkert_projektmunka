@@ -17,3 +17,16 @@ a {
 mat-nav-list {
     min-width: 200px;
 }
+
+.user-display-name-sidenav {
+    padding-left: 16px; /* Igazítás a többi menüponthoz */
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 0.9em;
+    color: rgba(0,0,0,.7); /* Hasonló, mint a matListItemTitle */
+    display: flex;
+    align-items: center;
+  }
+  .user-display-name-sidenav mat-icon {
+    margin-right: 16px; /* Térköz az ikon és a név között */
+  }

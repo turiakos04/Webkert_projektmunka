@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard, publicGuard } from './shared/guards/auth/auth.guard';
 
 export const routes: Routes = [
   {
@@ -19,12 +20,22 @@ export const routes: Routes = [
   {
     path: 'profile',
     loadComponent: () =>
-      import('./pages/profile/profile.component').then(m => m.ProfileComponent),
+      import('./pages/profile/profile.component').then(m => m.ProfileComponent), canActivate: [authGuard]
   },
   {
     path: 'results',
     loadComponent: () =>
-      import('./pages/results/results.component').then(m => m.ResultsComponent),
+      import('./pages/results/results.component').then(m => m.ResultsComponent), canActivate: [authGuard]
+  },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./pages/login/login.component').then(m => m.LoginComponent), canActivate: [publicGuard]
+  },
+  {
+    path: 'register',
+    loadComponent: () =>
+      import('./pages/register/register.component').then(m => m.RegisterComponent), canActivate: [publicGuard]
   },
   {
     path: '',
@@ -33,6 +44,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: 'home', // Vagy egy 'NotFoundComponent'-ra
   },
 ];

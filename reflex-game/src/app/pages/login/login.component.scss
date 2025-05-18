@@ -1,0 +1,43 @@
+.login-container {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    background-color: rgba(26,44,53,255);
+  
+    h1 {
+      margin-bottom: 20px;
+      color: white;
+    }
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  
+  }
+
+  .error-message {
+    color: #f44336;
+    margin-bottom: 16px;
+  }
+  
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    
+    h2 {
+      margin-bottom: 20px;
+      color: white;
+    }
+    
+    p {
+      margin-top: 20px;
+      font-size: 16px;
+    }
+  }
